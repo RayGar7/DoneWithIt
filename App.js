@@ -5,8 +5,14 @@ import ViewImageScreen from './app/screens/ViewImageScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
+import MessagesScreen from './app/screens/MessagesScreen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   console.log('App executed');
-  return <ViewImageScreen />;
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <MessagesScreen />
+    </GestureHandlerRootView>
+  );
 }

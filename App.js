@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import ViewImageScreen from './app/screens/ViewImageScreen';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import WelcomeScreen from './app/screens/WelcomeScreen';
-import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
-import MessagesScreen from './app/screens/MessagesScreen';
+import React, { useState } from 'react';
+import { Text } from 'react-native';
 import Screen from './app/components/Screen';
-import Icon from './app/components/Icon';
-import ListItem from './app/components/ListItem';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import AccountScreen from './app/screens/AccountScreen';
-import ListingsScreen from './app/screens/ListingsScreen';
+import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
+import AppTextInput from './app/components/AppTextInput';
 
 export default function App() {
   console.log('App executed');
+
+  const [firstName, setFirstName] = useState('');
+
   return (
-    <ListingsScreen />
+    <GestureHandlerRootView>
+      <Screen>
+        <Text>{ firstName }</Text>
+        <AppTextInput 
+          onChangeText={text => setFirstName(text)}
+          placeholder="Username" 
+          icon="email" 
+          style={{
+            borderBottomColor: '#ccc',
+            borderBottomWidth: 1,
+            height: 40,
+            fontSize: 20
+          }}
+        />
+      </Screen>
+    </GestureHandlerRootView>
   );
 }

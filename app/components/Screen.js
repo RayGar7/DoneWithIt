@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.light,
         flex: 1
     }
-})
+});
 
 export default Screen;

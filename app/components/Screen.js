@@ -6,7 +6,7 @@ import colors from '../config/colors';
 
 function Screen({ children, style }) {
     return (
-        <SafeAreaView style={styles.screen}>{children}</SafeAreaView>
+        <SafeAreaView style={[styles.screen, style]}>{children}</SafeAreaView>
     );
 }
 const styles = StyleSheet.create({

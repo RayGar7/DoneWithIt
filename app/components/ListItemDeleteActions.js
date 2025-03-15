@@ -8,7 +8,7 @@ import colors from "../config/colors";
 function ListItemDeleteActions({ onPress }) {
     return (
         <TouchableWithoutFeedback onPress={onPress}>
-            <View styles={styles.container}>
+            <View style={styles.container}>
                 <MaterialCommunityIcons
                     name="trash-can"
                     size={35}

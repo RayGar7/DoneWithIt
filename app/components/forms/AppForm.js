@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
 import React from 'react';
 
+// AppForm not in use: apparently you need <Formik> and its children in the same file
 function AppForm({ initialValues, onSubmit, validationSchema, children }) {
     return (
         <Formik 
@@ -8,11 +9,7 @@ function AppForm({ initialValues, onSubmit, validationSchema, children }) {
             onSubmit={onSubmit}
             validationSchema={validationSchema}
         >
-            {() => (
-                <>
-                    {children}
-                </>
-            )}
+            {() => <>{children}</>}
         </Formik>
     );
 }

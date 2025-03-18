@@ -2,8 +2,12 @@ import React from 'react';
 import { StyleSheet, Image } from 'react-native';
 
 import Screen from '../components/Screen';
-import { AppForm } from '../components/forms';
+import {
+  AppFormField as FormField,
+  SubmitButton,
+} from "../components/forms";
 import * as Yup from 'yup';
+import { Formik } from 'formik';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required().label('Name'),
@@ -15,21 +19,47 @@ const validationSchema = Yup.object().shape({
 function RegisterScreen(props) {
     return (
         <Screen style={styles.container}>
-            <Image 
-                source={require("../assets/logo-red.png")} 
-                style={styles.logo} />
-
-            <AppForm
-                initialValues={{ name: '', email: '', password: '' }}
-                onSubmit={values => console.log(values)}
-                validationSchema={validationSchema}
-            >                
-            </AppForm>
+            <Formik
+                initialValues={{ name: "", email: "", password: "" }}
+                onSubmit={(values) => console.log(values)}
+                validationSchema={validationSchema} 
+            >
+                {() => <> 
+                    <FormField
+                        autoCorrect={false}
+                        icon="account"
+                        name="name"
+                        placeholder="Name"
+                    />
+                    <FormField
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon="email"
+                        keyboardType="email-address"
+                        name="email"
+                        placeholder="Email"
+                        textContentType="emailAddress"
+                    />
+                    <FormField
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon="lock"
+                        name="password"
+                        placeholder="Password"
+                        secureTextEntry
+                        textContentType="password"
+                    />
+                    <SubmitButton title="Register" />
+                </>}
+            </Formik>
         </Screen>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+      padding: 10,
+    },
     logo: {
         width: 80,
         height: 80,

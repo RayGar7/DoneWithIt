@@ -33,34 +33,32 @@ function AccountScreen(props) {
                     title="Mosh Hamedani"
                     subTitle="programmingwithmosh@gmail.com"
                     image={require('../assets/mosh.jpg')} >
-
                 </ListItem>
             </View>
             <View style={styles.container}>
                 <FlatList 
                     data={menuItems}
-                    keyExtractor={menuItem => menuItem.title}
+                    keyExtractor={(menuItem) => menuItem.title}
                     ItemSeparatorComponent={ListItemSeparator }
-                    renderItem={({ item }) => {
+                    renderItem={({ item }) => (
                         <ListItem
                             title={item.title}
-                            ImageComponent={
+                            IconComponent={
                                 <Icon
                                     name={item.icon.name}
                                     backgroundColor={item.icon.backgroundColor}
                                 />
-                            } 
-                        />
-                        }
-                    }
-                />
+                            }
+                        >
+                        </ListItem>
+                    )}
+                    >
+                </FlatList>
             </View>
             <ListItem
                 title="Log Out"
-                ImageComponent={
-                    <Icon name="logout" backgroundColor="#ffe66d" />
-                } >
-
+                IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />} 
+                >
             </ListItem>
         </Screen>
     );

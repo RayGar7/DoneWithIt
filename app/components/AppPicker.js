@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import AppText from './AppText';
 import defaultStyles from '../config/styles';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { GestureHandlerRootView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useState } from 'react';
 import { Modal } from 'react-native';
 import { Button } from 'react-native';
@@ -17,43 +17,49 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
 
     return (
         <React.Fragment>
-            <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-                <View style={styles.container}>
-                    {
-                        icon 
-                        && 
+            <GestureHandlerRootView>
+                <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
+                    <View style={styles.container}>
+                        {
+                            icon 
+                            && 
+                            <MaterialCommunityIcons 
+                                name={icon} 
+                                size={20} 
+                                color={defaultStyles.colors.medium} 
+                                style={styles.icon} 
+                            />
+                        }
+                        {selectedItem ? (
+                            <AppText style={styles.text}>{selectedItem.label}</AppText>
+                        ) : (
+                            <AppText style={styles.placeholder}>{placeholder}</AppText>
+                        )}
                         <MaterialCommunityIcons 
-                            name={icon} 
+                            name="chevron-down-circle" 
                             size={20} 
-                            color={defaultStyles.colors.medium} 
-                            style={styles.icon} 
+                            color={defaultStyles.colors.black} 
+                            style={styles.chevronIcon} 
                         />
-                    }
-                    <AppText style={styles.text}>{selectedItem ? selectedItem.label : placeholder}</AppText>
-                    <MaterialCommunityIcons 
-                        name="chevron-down-circle" 
-                        size={20} 
-                        color={defaultStyles.colors.black} 
-                        style={styles.chevronIcon} 
-                    />
-                </View>
-            </TouchableWithoutFeedback>
-            <Modal visible={modalVisible} animationType="slide">
-                <Screen>
-                    <Button title="Close" onPress={() => setModalVisible(false)} />
-                    <FlatList 
-                        data={items}
-                        keyExtractor={item => item.value.toString()}
-                        renderItem={({ item }) => (
-                            <PickerItem 
-                                label={item.label} 
-                                onPress={() => {
-                                    setModalVisible(false);
-                                    onSelectItem(item);
-                                }} />
-                        )} />
-                </Screen>                    
-            </Modal>
+                    </View>
+                </TouchableWithoutFeedback>
+                <Modal visible={modalVisible} animationType="slide">
+                    <Screen>
+                        <Button title="Close" onPress={() => setModalVisible(false)} />
+                        <FlatList 
+                            data={items}
+                            keyExtractor={item => item.value.toString()}
+                            renderItem={({ item }) => (
+                                <PickerItem 
+                                    label={item.label} 
+                                    onPress={() => {
+                                        setModalVisible(false);
+                                        onSelectItem(item);
+                                    }} />
+                            )} />
+                    </Screen>                    
+                </Modal>
+            </GestureHandlerRootView>
         </React.Fragment>
     );
 }
@@ -71,6 +77,10 @@ const styles = StyleSheet.create({
         marginRight: 10,
         alignItems: "center", // Center content vertically
         justifyContent: "center", // Center content horizontally
+    },
+    placeholder: {
+      color: defaultStyles.colors.medium,
+      flex: 1,
     },
     textInput: {
         fontSize: 18,

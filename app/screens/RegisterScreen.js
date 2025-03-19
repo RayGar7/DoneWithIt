@@ -8,6 +8,7 @@ import {
 } from "../components/forms";
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+// use Formik instead of AppForm
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required().label('Name'),

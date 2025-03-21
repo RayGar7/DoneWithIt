@@ -31,8 +31,11 @@ export default function App() {
     try {
       const result = await ImagePicker.launchImageLibraryAsync();
       if (!result.canceled) {
+      // Delay setting the imageUri to simulate a race condition
+      setTimeout(() => {
         setImageUri(result.uri);
-        console.log("result.uri:", result.uri);
+        console.log("Delayed result.uri:", result.uri); // Debugging
+      }, 1000); // 1-second delay
       }
     } catch (error) {
       console.log(error);

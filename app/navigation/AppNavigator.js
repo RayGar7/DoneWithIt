@@ -1,57 +1,45 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-// in future projects use this import instead of the above
-// import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+// in future projects use this import will be used for tabs
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+// this next import is the one we're replacing from now on
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import AccountNavigator from "./AccountNavigator";
 import FeedNavigator from "./FeedNavigator";
 import ListingEditScreen from "../screens/ListingEditScreen";
-import AccountNavigator from "./AccountNavigator";
 import NewListingButton from "./NewListingButton";
+import routes from "./routes";
 
 
-const Tab = createBottomTabNavigator();
-
-import routes from '../navigation/routes';
+const initialLayout = { width: Dimensions.get("window").width };
 
 
-const AppNavigator = () => (
-    <Tab.Navigator>
-        <Tab.Screen 
-            name="Feed" 
-            component={FeedNavigator}
-            options={{
-                tabBarIcon: ({ size, color }) => 
-                    <MaterialCommunityIcons name="home" size={size} color={color} />
-            }} />
-        <Tab.Screen
-            name="ListingEdit"
-            component={ListingEditScreen}
-            options={({ navigation }) => ({
-                tabBarButton: () => (
-                    <NewListingButton
-                        onPress={() => navigation.navigate(routes.LISTING__EDIT)} 
-                    />
-                ),
-                tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons
-                        name="plus-circle"
-                        color={color}
-                        size={size}
-                    />
-                ),
-            })}
-        />
-        <Tab.Screen 
-            name="Account" 
-            component={AccountNavigator}
-            options={{
-                tabBarIcon: ({ size, color }) => 
-                    <MaterialCommunityIcons name="account" size={size} color={color} />
-            }} />
-    </Tab.Navigator>    
-);
+const AppNavigator = () => {
+    const [index, setIndex] = useState(0);
+    const [routes] = useState([
+      { key: "feed", title: "Feed" },
+      { key: "listingEdit", title: "New Listing" },
+      { key: "account", title: "Account" },
+    ]);
+  
+    const renderScene = SceneMap({
+      feed: FeedNavigator,
+      listingEdit: ListingEditScreen,
+      account: AccountNavigator,
+    });
+
+    return (
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={{ width: initialLayout.width }}
+        tabBarPosition="bottom"
+      />
+    ); 
+}
 
 const styles = StyleSheet.create({
   tabBar: {

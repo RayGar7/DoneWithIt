@@ -1,0 +1,14 @@
+{
+    "categoryId": 5,
+    "id": 201,
+    "images": [
+        { "fileName": "camera2" }
+    ],
+    "location": {
+        "latitude": 37.78825,
+        "longitude": -122.4324
+    },
+    "price": 100,
+    "title": "Red jacket",
+    "userId": 1
+}

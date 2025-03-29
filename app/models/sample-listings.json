@@ -1,0 +1,118 @@
+[
+    {
+        "categoryId": 5,
+        "id": 201,
+        "images": [
+            []
+        ],
+        "location": {
+            "latitude": 37.78825,
+            "longitude": -122.4324
+        },
+        "price": 100,
+        "title": "Red jacket",
+        "userId": 1
+    },
+    {
+        "categoryId": 1,
+        "id": 3,
+        "images": [
+            []
+        ],
+        "location": {
+            "latitude": 37.78825,
+            "longitude": -122.4324
+        },
+        "price": 1200,
+        "title": "Gray couch in a great condition",
+        "userId": 2
+    },
+    {
+        "categoryId": 1,
+        "description": "I'm selling my furniture at a discount price. Pick up at Venice. DM me asap.",
+        "id": 1,
+        "images": [
+            [],
+            [],
+            []
+        ],
+        "location": {
+            "latitude": 37.78825,
+            "longitude": -122.4324
+        },
+        "price": 1000,
+        "title": "Room & Board couch (great condition) - delivery included",
+        "userId": 1
+    },
+    {
+        "categoryId": 5,
+        "id": 2,
+        "images": [
+            []
+        ],
+        "location": {
+            "latitude": 37.78825,
+            "longitude": -122.4324
+        },
+        "price": 100,
+        "title": "Designer wear shoes",
+        "userId": 2
+    },
+    {
+        "categoryId": 3,
+        "id": 102,
+        "images": [
+            []
+        ],
+        "location": {
+            "latitude": 37.78825,
+            "longitude": -122.4324
+        },
+        "price": 300,
+        "title": "Canon 400D (Great Condition)",
+        "userId": 1
+    },
+    {
+        "categoryId": 3,
+        "id": 101,
+        "images": [
+            []
+        ],
+        "location": {
+            "latitude": 37.78825,
+            "longitude": -122.4324
+        },
+        "price": 350,
+        "title": "Nikon D850 for sale",
+        "userId": 1
+    },
+    {
+        "categoryId": 1,
+        "description": "No rips no stains no odors",
+        "id": 4,
+        "images": [
+            []
+        ],
+        "location": {
+            "latitude": 37.78825,
+            "longitude": -122.4324
+        },
+        "price": 950,
+        "title": "Sectional couch - Delivery available",
+        "userId": 2
+    },
+    {
+        "categoryId": 5,
+        "id": 6,
+        "images": [
+            []
+        ],
+        "location": {
+            "latitude": 37.78825,
+            "longitude": -122.4324
+        },
+        "price": 50,
+        "title": "Brown leather shoes",
+        "userId": 2
+    }
+]

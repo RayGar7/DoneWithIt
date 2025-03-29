@@ -26,15 +26,20 @@ function ListingsScreen({ navigation }) {
     //we cannot pass an sync function to an effect hook so we define this function
     // can call it inside useEffect
     const loadListings = async () => {
-        const response = await listingsApi.getListings();
-        console.log("API Response:", response);
-        if (!response.ok) 
-            {
-                console.log("API Response Error:", response);
-                return setError(true);
-            }
-        setError(false);
-        setListings(response.data);
+        setLoading(true); // Show the loading indicator
+        const data = await listingsApi.getListings();
+        // uncomment for debugging
+        //console.log("data", data);
+        setLoading(false); // Hide the loading indicator
+    
+        if (!data) {
+            console.log("API Response Error: No data received");
+            setError(true); // Show the error message
+            return;
+        }
+    
+        setError(false); // Clear any previous errors
+        setListings(data); // Update the listings state
     }
 
     return (
@@ -44,7 +49,7 @@ function ListingsScreen({ navigation }) {
                 <AppButton title="Retry" onPress={loadListings} />
             </>}
             <ActivityIndicator visible={loading} />
-            {/* <FlatList 
+            <FlatList 
                 data={listings}
                 keyExtractor={listing => listing.id.toString()}
                 renderItem={({ item }) => (
@@ -55,7 +60,7 @@ function ListingsScreen({ navigation }) {
                         onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
                     />
                 )}
-            /> */}
+            />
         </Screen>
     );
 }

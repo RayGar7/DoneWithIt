@@ -7,7 +7,7 @@ const getListings = async () => {
     try {
         const response = await apiClient.get(endpoint);
         // uncomment for debugging
-        // console.log("response.data", response.data);
+        //console.log("response.data", response.data);
         return response.data;
     } catch (error) {
         console.error("Error fetching listings:", error);
@@ -15,8 +15,9 @@ const getListings = async () => {
     }
 };
 
+// the following is a named export
 export const addListing = (listing, onUploadProgress) => {
-    console.log("listing", listing);
+    //console.log("listing", listing);
     try {
         const formData = new FormData();
         formData.append("categoryId", null); // Assuming categoryId is not needed for now
@@ -49,6 +50,7 @@ export const addListing = (listing, onUploadProgress) => {
     }
 };
 
+// the folowin is a default export
 export default {
     getListings,
     addListing,

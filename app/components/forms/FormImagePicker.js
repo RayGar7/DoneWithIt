@@ -21,7 +21,7 @@ function FormImagePicker({ name }) {
             <ImageInputList 
                 imageUris={values[name]} 
                 onAddImage={handleAdd}
-                onRemove={handleRemove} />
+                onRemoveImage={handleRemove}   />
             <ErrorMessage />
         </>
     );

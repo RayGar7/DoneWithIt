@@ -1,25 +1,36 @@
-import React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { 
+    View, 
+    StyleSheet, 
+    Platform,
+    Modal,
+    Button,
+    FlatList } from 'react-native';
+import { GestureHandlerRootView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import AppText from './AppText';
-import defaultStyles from '../config/styles';
-import { GestureHandlerRootView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { useState } from 'react';
-import { Modal } from 'react-native';
-import { Button } from 'react-native';
 import Screen from './Screen';
-import { FlatList } from 'react-native';
 import PickerItem from './PickerItem';
+import defaultStyles from '../config/styles';
 
-function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
+function AppPicker({
+    icon,
+    items,
+    numberOfColumns = 1,
+    onSelectItem,
+    PickerItemComponent = PickerItem,
+    placeholder,
+    selectedItem,
+    width = "100%",
+}) {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <React.Fragment>
             <GestureHandlerRootView>
                 <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-                    <View style={styles.container}>
+                    <View style={[styles.container, { width }]}>
                         {
                             icon 
                             && 
@@ -49,14 +60,18 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
                         <FlatList 
                             data={items}
                             keyExtractor={item => item.value.toString()}
+                            numColumns={numberOfColumns}
                             renderItem={({ item }) => (
                                 <PickerItem 
-                                    label={item.label} 
+                                    item={item}
+                                    label={item.label}
                                     onPress={() => {
                                         setModalVisible(false);
                                         onSelectItem(item);
-                                    }} />
-                            )} />
+                                    }}
+                                />
+                            )} 
+                        />
                     </Screen>                    
                 </Modal>
             </GestureHandlerRootView>

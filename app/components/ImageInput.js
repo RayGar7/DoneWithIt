@@ -12,7 +12,7 @@ import * as ImagePicker from "expo-image-picker";
 import colors from "../config/colors";
 
 function ImageInput({ imageUri, onChangeImage }) {
-    console.log("imageUri: ", imageUri);
+    //console.log("imageUri: ", imageUri);
     useEffect(() => {
         requestPermission();
     }, []);
@@ -40,10 +40,11 @@ function ImageInput({ imageUri, onChangeImage }) {
     const selectImage = async () => {
         try {
             const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.Images,
-                quality: 0.5,
+                mediaTypes: ['images', 'videos'],
+                quality: 1,
             });
             console.log("result: ", result);
+            console.log("result.assets[0].uri", result.assets[0].uri);
 
             // Check if the user selected an image
             if (!result.canceled && result.assets && result.assets.length > 0) {

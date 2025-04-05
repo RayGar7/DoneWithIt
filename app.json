@@ -28,7 +28,8 @@
       "package": "com.yourcompany.donewithit",
       "versionCode": 1,
       "permissions": []
-    }
+    },
+      "jsEngine": "hermes"
     
   }
 }

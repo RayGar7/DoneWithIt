@@ -9,10 +9,10 @@ import {
 import { GestureHandlerRootView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import AppText from './AppText';
-import Screen from './Screen';
-import PickerItem from './PickerItem';
+import Text from './Text';
 import defaultStyles from '../config/styles';
+import PickerItem from './PickerItem';
+import Screen from './Screen';
 
 function AppPicker({
     icon,
@@ -42,9 +42,9 @@ function AppPicker({
                             />
                         }
                         {selectedItem ? (
-                            <AppText style={styles.text}>{selectedItem.label}</AppText>
+                            <Text style={styles.text}>{selectedItem.label}</Text>
                         ) : (
-                            <AppText style={styles.placeholder}>{placeholder}</AppText>
+                            <Text style={styles.placeholder}>{placeholder}</Text>
                         )}
                         <MaterialCommunityIcons 
                             name="chevron-down-circle" 
@@ -62,7 +62,7 @@ function AppPicker({
                             keyExtractor={item => item.value.toString()}
                             numColumns={numberOfColumns}
                             renderItem={({ item }) => (
-                                <PickerItem 
+                                <PickerItemComponent
                                     item={item}
                                     label={item.label}
                                     onPress={() => {

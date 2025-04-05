@@ -3,10 +3,12 @@ import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 import {
-  AppFormField as FormField,
-  AppFormPicker as Picker,
+  Form,
+  FormField,
+  FormPicker as Picker,
   SubmitButton,
 } from "../components/forms";
+import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
 import { Formik } from 'formik';
 import FormImagePicker from "../components/forms/FormImagePicker";
@@ -19,7 +21,7 @@ const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
   description: Yup.string().label("Description"),
-  category: Yup.object().required().nullable().label("Category"),
+  category: Yup.object().nullable().label("Category"),
   images: Yup.array().min(1, "Please select at least one image."),
 });
 
@@ -41,6 +43,7 @@ function ListingEditScreen() {
   const handleSubmit = async (listing) => {
     const result = await listingsApi.addListing({ ...listing, location});
 
+    console.log("result", result);
     if (!result.ok) 
       return alert("Could not save the listing.");
     alert("Listing saved successfully!");
@@ -70,7 +73,14 @@ function ListingEditScreen() {
               name="price"
               placeholder="Price"
             />
-            <Picker items={categories} name="category" placeholder="Category" />
+            <Picker
+              items={categories}
+              name="category"
+              numberOfColumns={3}
+              PickerItemComponent={CategoryPickerItem}
+              placeholder="Category"
+              width="50%"
+            />
             <FormField
               maxLength={255}
               multiline

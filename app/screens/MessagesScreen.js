@@ -13,17 +13,18 @@ import ListItemDeleteActions from '../components/ListItemDeleteActions';
 
 const initialMessages = [
     {
-        id: 1,
-        title: 'T1',
-        description: 'D1',
-        image: require('../assets/mosh.jpg')
+      id: 1,
+      title: "Mosh Hamedani",
+      description: "Hey! Is this item still available?",
+      image: require("../assets/mosh.jpg"),
     },
     {
-        id: 2,
-        title: 'T2',
-        description: 'D2',
-        image: require('../assets/mosh.jpg')
-    }
+      id: 2,
+      title: "Mosh Hamedani",
+      description:
+        "I'm interested in this item. When will you be able to post it?",
+      image: require("../assets/mosh.jpg"),
+    },
 ]
 
 function MessagesScreen(props) {
@@ -41,7 +42,7 @@ function MessagesScreen(props) {
             <FlatList
                 data={messages}
                 keyExtractor={message => message.id.toString()}
-                renderItem={({ item }) => 
+                renderItem={({ item }) => (
                     <ListItem
                         title={item.title}
                         subTitle={item.description}
@@ -51,7 +52,7 @@ function MessagesScreen(props) {
                             <ListItemDeleteActions onPress={() => handleDelete(item)} />
                         }
                     />
-                }
+                )}
                 ItemSeparatorComponent={ListItemSeparator}
                 refreshing={refreshing}
                 onRefresh={() => {

@@ -7,8 +7,8 @@ const getListings = async () => {
     try {
         const response = await client.get(endpoint);
         // uncomment for debugging
-        console.log("response", response);
-        console.log("response.data", response.data);
+        //console.log("response", response);
+        //console.log("response.data", response.data);
         return response.data;
     } catch (error) {
         console.error("Error fetching listings:", error);

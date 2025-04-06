@@ -7,9 +7,9 @@ import {
 import Constants from "expo-constants";
 
 import Screen from '../components/Screen';
-import ListItem from '../components/ListItem';
-import ListItemSeparator from '../components/ListItemSeparator';
-import ListItemDeleteActions from '../components/ListItemDeleteActions';
+import ListItem from '../components/lists/ListItem';
+import ListItemSeparator from '../components/lists/ListItemSeparator';
+import ListItemDeleteActions from '../components/lists/ListItemDeleteAction';
 
 const initialMessages = [
     {

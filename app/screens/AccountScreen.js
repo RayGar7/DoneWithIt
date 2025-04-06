@@ -26,7 +26,7 @@ const menuItems = [
     }
 ]
 
-function AccountScreen(props) {
+function AccountScreen({ navigation}) {
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>

@@ -1,11 +1,11 @@
-import client from './client';
+import apiClient from './client';
 
 const endpoint = '/listings';
 
 
 const getListings = async () => {
     try {
-        const response = await client.get(endpoint);
+        const response = await apiClient.get(endpoint);
         // uncomment for debugging
         //console.log("response", response);
         //console.log("response.data", response.data);
@@ -40,7 +40,7 @@ export const addListing = (listing, onUploadProgress) => {
             data.append("location", JSON.stringify(listing.location)); // Convert location object to string
         }
 
-        return client.post(endpoint, formData, {
+        return apiClient.post(endpoint, formData, {
             onUploadProgress: (progress) =>
                 onUploadProgress(progress.loaded / progress.total)
         });

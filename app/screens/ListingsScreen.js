@@ -4,9 +4,10 @@ import * as Animatable from 'react-native-animatable';
 
 import Screen from '../components/Screen';
 import Card from '../components/Card';
-import Text from '../components/AppText';
-import AppButton from '../components/Button';
+import AppText from '../components/AppText';
+import AppButton from '../components/AppButton';
 import ActivityIndicator from '../components/ActivityIndicator';
+
 import listingsApi from '../api/listings';
 import useLocation from '../hooks/useLocation';
 import useApi from "../hooks/useApi";
@@ -16,8 +17,9 @@ import routes from '../navigation/routes';
 import colors from '../config/colors';
 
 function ListingsScreen({ navigation }) {
-    const getListingsApi = useApi(listingsApi.getListings);
-    console.log("ListingsScreen.js getListingsApi:", getListingsApi);
+    const [listings, setListings] = useState([]);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchListings = async () => {
@@ -26,13 +28,32 @@ function ListingsScreen({ navigation }) {
         fetchListings();
     }, []);
 
+    //we cannot pass an sync function to an effect hook so we define this function
+    // can call it inside useEffect
+    const loadListings = async () => {
+        setLoading(true); // Show the loading indicator
+        const data = await listingsApi.getListings();
+        // uncomment for debugging
+        //console.log("data", data);
+        setLoading(false); // Hide the loading indicator
+    
+        if (!data) {
+            console.log("API Response Error: No data received");
+            setError(true); // Show the error message
+            return;
+        }
+    
+        setError(false); // Clear any previous errors
+        setListings(data); // Update the listings state
+    }
+
     return (
         <Screen style={styles.screen}>
-            {getListingsApi.error && <>
-                <Text>Couldn't retrieve the listings.</Text>
+            {error && <>
+                <AppText>Couldn't retrieve the listings.</AppText>
                 <AppButton title="Retry" onPress={loadListings} />
             </>}
-            <ActivityIndicator visible={getListingsApi.loading} />
+            <ActivityIndicator visible={loading} />
             <FlatList 
                 data={getListingsApi.data}
                 keyExtractor={listing => listing.id.toString()}

@@ -1,18 +1,18 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import FeedNavigator from "./FeedNavigator";
-import ListingEditScreen from "../screens/ListingEditScreen";
+
+import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen";
+import WelcomeScreen from "../screens/WelcomeScreen";
 import AccountScreen from "../screens/AccountScreen";
 import MessagesScreen from "../screens/MessagesScreen";
 
+
 const Stack = createStackNavigator();
 
-const AccountNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen name="Account" component={AccountScreen} />
-    <Stack.Screen name="Messages" component={MessagesScreen} />
-  </Stack.Navigator>
-);
+const AccountNavigator = () => {
+  return <AccountScreen />;
+};
 
 
 export default AccountNavigator;

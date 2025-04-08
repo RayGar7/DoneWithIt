@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { 
-    FlatList,
-    StyleSheet,
-    View
- } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import Constants from "expo-constants";
 
 import Screen from '../components/Screen';
 import ListItem from '../components/lists/ListItem';
 import ListItemSeparator from '../components/lists/ListItemSeparator';
 import ListItemDeleteActions from '../components/lists/ListItemDeleteAction';
+import ListItem from '../components/lists/ListItem';
+import ListItemSeparator from '../components/lists/ListItemSeparator';
+import ListItemDeleteActions from '../components/lists/ListItemDeleteActions';
 
 const initialMessages = [
     {

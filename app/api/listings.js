@@ -20,16 +20,16 @@ const getListings = async () => {
 export const addListing = (listing, onUploadProgress) => {
     console.log("listing", listing);
     try {
-        const formData = new FormData();
-        formData.append("categoryId", null); // Assuming categoryId is not needed for now
-        formData.append("price", listing.price);
-        formData.append("title", listing.title);
-        formData.append("description", listing.description);
+        const data = new FormData();
+        data.append("price", listing.price);
+        data.append("title", listing.title);
+        data.append("categoryId", listing.category.value); 
+        data.append("description", listing.description);
 
         //console.log("formData", formData);
 
         listing.images.forEach((image, index) => {
-            formData.append('images', {
+            data.append('images', {
                 name: 'image' + index,
                 type: 'image/jpeg',
                 uri: image,
@@ -37,7 +37,7 @@ export const addListing = (listing, onUploadProgress) => {
         });
 
         if (listing.location) {
-            formData.append("location", JSON.stringify(listing.location)); // Convert location object to string
+            data.append("location", JSON.stringify(listing.location)); // Convert location object to string
         }
 
         return client.post(endpoint, formData, {

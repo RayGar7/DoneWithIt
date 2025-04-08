@@ -1,45 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 import Screen from '../components/Screen';
 import Card from '../components/Card';
-import AppText from '../components/Text';
+import Text from '../components/AppText';
 import AppButton from '../components/Button';
+import ActivityIndicator from '../components/ActivityIndicator';
 import listingsApi from '../api/listings';
+import useLocation from '../hooks/useLocation';
+import useApi from "../hooks/useApi";
 
 import routes from '../navigation/routes';
 
 import colors from '../config/colors';
 
 function ListingsScreen({ navigation }) {
-    const [listings, setListings] = useState([]);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const getListingsApi = useApi(listingsApi.getListings);
+    console.log("ListingsScreen.js getListingsApi:", getListingsApi);
 
     useEffect(() => {
-        loadListings();
+        const fetchListings = async () => {
+            await getListingsApi.request(); // Await the request to ensure it completes
+        };
+        fetchListings();
     }, []);
-
-    //we cannot pass an sync function to an effect hook so we define this function
-    // can call it inside useEffect
-    const loadListings = async () => {
-        const response = await listingsApi.getListings();
-        //console.log("ListingsScreen.js response:", response);
-        if (!response.ok) return setError(true);                                // always handle errors first
-
-        setError(false);                                                     
-        setListings(response.data);
-        //console.log("ListingsScreen.js listings:", listings);
-    }
 
     return (
         <Screen style={styles.screen}>
-            {error && <>
-                <AppText>Couldn't retrieve the listings.</AppText>
+            {getListingsApi.error && <>
+                <Text>Couldn't retrieve the listings.</Text>
                 <AppButton title="Retry" onPress={loadListings} />
             </>}
+            <ActivityIndicator visible={getListingsApi.loading} />
             <FlatList 
-                data={listings}
+                data={getListingsApi.data}
                 keyExtractor={listing => listing.id.toString()}
                 renderItem={({ item }) => (
                     <Card 

@@ -8,7 +8,7 @@ import ImageInput from "./app/components/ImageInput";
 import { Image } from "react-native";
 import { StyleSheet } from "react-native";
 
- import Screen from "./app/components/Screen";
+import Screen from "./app/components/Screen";
 
 export default function App() {
   const [imageUri, setImageUri] = useState();
@@ -35,9 +35,10 @@ export default function App() {
 
   return (
     <Screen>
-      <AppButton title="Select Image" onPress={selectImage} />
-      <Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} />
-      <ImageInput imageUri={imageUri} />
+      <ImageInput 
+        imageUri={imageUri} 
+        onChangeImage={(uri) => setImageUri(uri)}
+      />
     </Screen>
   );
 }

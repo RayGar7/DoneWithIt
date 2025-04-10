@@ -37,10 +37,10 @@ function AccountScreen({ navigation}) {
                 </ListItem>
             </View>
             <View style={styles.container}>
-                <FlatList 
+                <FlatList
                     data={menuItems}
                     keyExtractor={(menuItem) => menuItem.title}
-                    ItemSeparatorComponent={ListItemSeparator }
+                    ItemSeparatorComponent={ListItemSeparator}
                     renderItem={({ item }) => (
                         <ListItem
                             title={item.title}
@@ -50,12 +50,9 @@ function AccountScreen({ navigation}) {
                                     backgroundColor={item.icon.backgroundColor}
                                 />
                             }
-                            onPress={() => navigation.navigate(item.targetScreen)}
-                        >
-                        </ListItem>
+                        />
                     )}
-                    >
-                </FlatList>
+                />
             </View>
             <ListItem
                 title="Log Out"

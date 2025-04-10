@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
 });
 
 
-function RegisterScreen(props) {
+function RegisterScreen() {
     return (
         <Screen style={styles.container}>
             <Formik

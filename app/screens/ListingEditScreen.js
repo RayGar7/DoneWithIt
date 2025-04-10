@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 import {
-  Form,
   FormField,
   FormPicker as Picker,
   SubmitButton,
@@ -11,12 +10,6 @@ import {
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
 import { Formik } from 'formik';
-import FormImagePicker from "../components/forms/FormImagePicker";
-import { useState, useEffect } from "react";
-import useLocation from "../hooks/useLocation";
-
-import listingsApi from "../api/listings";
-import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -39,45 +32,21 @@ const categories = [
 ];
 
 function ListingEditScreen() {
-  const location = useLocation();
-  const [uploadVisible, setUploadVisible] = useState(false);
-  const [progress, setprogress] = useState(0);
-
-  const handleSubmit = async (listing) => {
-    setprogress(0);
-    setUploadVisible(true);
-    const result = await listingsApi.addListing(
-      { ...listing, location},
-      (progress) => setprogress(progress)
-    );
-    setUploadVisible(false);
-
-    console.log("result", result);
-    if (!result.ok) {
-      setUploadVisible(false);
-      return alert("Could not save the listing.");
-    }
-    alert("Listing saved successfully!");
-  }
-
   return (
     <Screen style={styles.container}>
-      <UploadScreen onDone={() => setUploadVisible(false)} progress={progress} visible={uploadVisible} />
       <Formik
         initialValues={{
           title: "",
           price: "",
           description: "",
           category: null,
-          images: []
         }}
         // onSubmit pass a function that will be called onSubmit
-        onSubmit={handleSubmit}
+        onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
         {() => (
           <>
-            <FormImagePicker name="images" />
             <FormField maxLength={255} name="title" placeholder="Title" />
             <FormField
               keyboardType="numeric"

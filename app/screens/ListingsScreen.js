@@ -16,57 +16,21 @@ import routes from '../navigation/routes';
 
 import colors from '../config/colors';
 
-function ListingsScreen({ navigation }) {
-    const [listings, setListings] = useState([]);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        const fetchListings = async () => {
-            await getListingsApi.request(); // Await the request to ensure it completes
-        };
-        fetchListings();
-    }, []);
-
-    //we cannot pass an sync function to an effect hook so we define this function
-    // can call it inside useEffect
-    const loadListings = async () => {
-        setLoading(true); // Show the loading indicator
-        const data = await listingsApi.getListings();
-        // uncomment for debugging
-        //console.log("data", data);
-        setLoading(false); // Hide the loading indicator
-    
-        if (!data) {
-            console.log("API Response Error: No data received");
-            setError(true); // Show the error message
-            return;
-        }
-    
-        setError(false); // Clear any previous errors
-        setListings(data); // Update the listings state
-    }
-
+function ListingsScreen(props) {
     return (
-        <Screen style={styles.screen}>
-            {error && <>
-                <AppText>Couldn't retrieve the listings.</AppText>
-                <AppButton title="Retry" onPress={loadListings} />
-            </>}
-            <ActivityIndicator visible={loading} />
-            <FlatList 
-                data={getListingsApi.data}
-                keyExtractor={listing => listing.id.toString()}
-                renderItem={({ item }) => (
-                    <Card 
-                        title={item.title}
-                        subTitle={"$" + item.price}
-                        imageUrl={item.images[0].url}
-                        onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
-                    />
-                )}
+      <Screen style={styles.screen}>
+        <FlatList
+          data={listings}
+          keyExtractor={(listing) => listing.id.toString()}
+          renderItem={({ item }) => (
+            <Card
+              title={item.title}
+              subTitle={"$" + item.price}
+              image={item.image}
             />
-        </Screen>
+          )}
+        />
+      </Screen>
     );
 }
 

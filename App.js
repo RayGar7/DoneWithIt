@@ -9,35 +9,26 @@ import { Image } from "react-native";
 import { StyleSheet } from "react-native";
 
 import Screen from "./app/components/Screen";
+import ImageInputList from './app/components/ImageInputList';
+
 
 export default function App() {
-  const [imageUri, setImageUri] = useState();
-  const requestPermission = async () => {
+  const [imageUris, setImageUris] = useState([]);
 
-    const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
-    if (!granted) alert("You need to enable permission to access the library.");
-  };
+  const handleAdd = (uri) => {
+    setImageUris([...imageUris, uri]);
+  }
 
-  useEffect(() => {
-    requestPermission();
-  }, []);
-
-  const selectImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync();
-      if (!result.canceled) 
-        setImageUri(result.uri);
-      
-    } catch (error) {
-      console.log("Error reading an image", error);
-    }
-  };
+  const handleRemove = (uri) => {
+    setImageUris(imageUris.filter(imageUri => imageUri !== uri));
+  }
 
   return (
     <Screen>
-      <ImageInput 
-        imageUri={imageUri} 
-        onChangeImage={(uri) => setImageUri(uri)}
+      <ImageInputList 
+        imageUris={imageUris} 
+        onAddImage={handleAdd}
+        onRemoveimage={uri => handleRemove(uri)}
       />
     </Screen>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
@@ -7,9 +7,12 @@ import {
   FormPicker as Picker,
   SubmitButton,
 } from "../components/forms";
+import FormImagePicker from "../components/forms/FormImagePicker";
 import CategoryPickerItem from "../components/CategoryPickerItem";
+
 import Screen from "../components/Screen";
 import { Formik } from 'formik';
+import useLocation from "../hooks/useLocation";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -32,6 +35,8 @@ const categories = [
 ];
 
 function ListingEditScreen() {
+  const location = useLocation();
+
   return (
     <Screen style={styles.container}>
       <Formik
@@ -40,6 +45,7 @@ function ListingEditScreen() {
           price: "",
           description: "",
           category: null,
+          images: [],
         }}
         // onSubmit pass a function that will be called onSubmit
         onSubmit={(values) => console.log(values)}
@@ -47,6 +53,7 @@ function ListingEditScreen() {
       >
         {() => (
           <>
+            <FormImagePicker name="images" />
             <FormField maxLength={255} name="title" placeholder="Title" />
             <FormField
               keyboardType="numeric"

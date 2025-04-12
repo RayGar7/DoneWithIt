@@ -40,6 +40,7 @@ function ListingEditScreen() {
           price: "",
           description: "",
           category: null,
+          images: [],
         }}
         // onSubmit pass a function that will be called onSubmit
         onSubmit={(values) => console.log(values)}
@@ -47,6 +48,7 @@ function ListingEditScreen() {
       >
         {() => (
           <>
+            <FormImagePicker name="images" />
             <FormField maxLength={255} name="title" placeholder="Title" />
             <FormField
               keyboardType="numeric"

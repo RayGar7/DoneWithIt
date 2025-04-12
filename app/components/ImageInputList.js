@@ -7,6 +7,8 @@ function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {
     const scrollView = useRef();
 
     return (
+        // the size of a view is determined by the size of its content
+        // so we need to wrap the ScrollView in a View
         <View>
             <ScrollView ref={scrollView} horizontal onContentSizeChange={() => scrollView.current.scrollToEnd()}>
                 <View style={styles.container}>

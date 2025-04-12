@@ -1,10 +1,10 @@
 import React from 'react';
-import ImageInputList from './ImageInputList';
+import ImageInputList from '../ImageInputList';
 import ErrorMessage from './ErrorMessage';
 import { useFormikContext } from 'formik';
 
 function FormImagePicker({ name }) {
-    const { errors, touched, setFieldValue, name, values } = useFormikContext();
+    const { errors, setFieldValue, touched, values } = useFormikContext();
     const imageUris = values[name];
 
     const handleAdd = (uri) => {

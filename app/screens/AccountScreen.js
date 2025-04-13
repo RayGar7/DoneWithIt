@@ -26,7 +26,7 @@ const menuItems = [
     }
 ]
 
-function AccountScreen({ navigation}) {
+function AccountScreen({ navigation }) {
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
@@ -50,6 +50,7 @@ function AccountScreen({ navigation}) {
                                     backgroundColor={item.icon.backgroundColor}
                                 />
                             }
+                            onPress={() => navigation.navigate(item.targetScreen)}
                         />
                     )}
                 />

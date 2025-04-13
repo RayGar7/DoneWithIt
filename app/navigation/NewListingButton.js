@@ -3,6 +3,7 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../config/colors';
 
+// not in use. There's no real value in styling that tab button this elaborately
 function NewListingButton({ onPress }) {
     return (
         <TouchableOpacity onPress={onPress}>

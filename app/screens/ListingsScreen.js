@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 
 import Screen from '../components/Screen';
 import Card from '../components/Card';
-import AppText from '../components/AppText';
-import AppButton from '../components/AppButton';
-import ActivityIndicator from '../components/ActivityIndicator';
-
-import listingsApi from '../api/listings';
-import useLocation from '../hooks/useLocation';
-import useApi from "../hooks/useApi";
-
-import routes from '../navigation/routes';
-
+import routes from '../navigation/routes'
 import colors from '../config/colors';
 
-function ListingsScreen(props) {
+const listings = [
+  {
+    id: 1,
+    title: "Red jacket for sale",
+    price: 100,
+    image: require("../assets/jacket.jpg"),
+  },
+  {
+    id: 2,
+    title: "Couch in great condition",
+    price: 1000,
+    image: require("../assets/couch.jpg"),
+  },
+];
+
+function ListingsScreen({ navigation}) {
     return (
       <Screen style={styles.screen}>
         <FlatList
@@ -27,6 +32,7 @@ function ListingsScreen(props) {
               title={item.title}
               subTitle={"$" + item.price}
               image={item.image}
+              onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
             />
           )}
         />

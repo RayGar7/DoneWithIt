@@ -25,38 +25,24 @@ const listings = [
   },
 ];
 
-function ListingsScreen({ navigation}) {
-  const [listings, setListings] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+function ListingsScreen({ navigation }) {
+  const getListingsApi = useApi(listingsApi.getListings);
 
   useEffect(() => {
-    loadListings();
-
+    getListingsApi.request(1, 2, 3);
   }, []);
-
-  const loadListings = async () => {
-    setLoading(true);
-    const response = await listingsApi.getListings()
-    console.log("ListingsScreen.js response.map:", response.data.map((listing) => listing.images[0].url));
-    //setLoading(false);
-    if (!response.ok) return setError(true);
-    
-    setError(false);
-    setListings(response.data);
-  }
 
   return (
     <Screen style={styles.screen}>
-      {error && (
+      {getListingsApi.error && (
         <> 
           <AppText>Couldn't retrieve the listings.</AppText>
           <AppButton title="Retry" onPress={loadListings} />
         </>
       )}
-      <ActivityIndicator visible={loading} />
+      <ActivityIndicator visible={getListingsApi.loading} />
       <FlatList
-        data={listings}
+        data={getListingsApi.data}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
           <Card

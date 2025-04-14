@@ -19,10 +19,13 @@ const addListing = listing => {
         })
     );
 
+    console.log("listrings.js listing:", listing);
     if (listing.location)
         data.append('location', JSON.stringify(listing.location));
 
-    return client.post(endpoint, data);
+    return client.post(endpoint, data, {
+        onUploadProgress: (progress) => console.log(progress.loaded / progress.total),
+    });
 }
 
 export default {

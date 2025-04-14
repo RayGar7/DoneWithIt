@@ -37,6 +37,7 @@ const categories = [
 
 function ListingEditScreen() {
   const location = useLocation();
+  //console.log("location:", location);
 
   const handleSubmit = async (listing) => {
     const result = await listingsApi.addListing({ ...listing, location });
@@ -55,7 +56,7 @@ function ListingEditScreen() {
           images: [],
         }}
         // onSubmit pass a function that will be called onSubmit
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleSubmit(values)}
         validationSchema={validationSchema}
       >
         {() => (

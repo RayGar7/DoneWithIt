@@ -1,14 +1,14 @@
 {
-    "categoryId": 5,
-    "id": 201,
-    "images": [
-        { "fileName": "camera2" }
-    ],
-    "location": {
-        "latitude": 37.78825,
-        "longitude": -122.4324
+    "category": {
+        "backgroundColor": "#26de81",
+        "icon": "cards",
+        "label": "Games",
+        "value": 4
     },
-    "price": 100,
-    "title": "Red jacket",
-    "userId": 1
+    "description": "Ggg",
+    "images": [
+        "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FDoneWithIt-0cbd5319-8dd8-4f2c-9261-74576e3c20ad/ImagePicker/0269f6bc-6691-4c49-b3b0-0f5f44e4dbb1.jpeg"
+    ],
+    "price": "5",
+    "title": "Ggv"
 }

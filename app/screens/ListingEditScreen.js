@@ -12,6 +12,7 @@ import CategoryPickerItem from "../components/CategoryPickerItem";
 
 import Screen from "../components/Screen";
 import { Formik } from 'formik';
+import listingsApi from "../api/listings";
 import useLocation from "../hooks/useLocation";
 
 const validationSchema = Yup.object().shape({
@@ -36,6 +37,12 @@ const categories = [
 
 function ListingEditScreen() {
   const location = useLocation();
+
+  const handleSubmit = async (listing) => {
+    const result = await listingsApi.addListing({ ...listing, location });
+    if (!result.ok) 
+      alert("Could not save the listing.");
+  }
 
   return (
     <Screen style={styles.container}>

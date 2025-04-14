@@ -9,6 +9,7 @@ import routes from '../navigation/routes'
 import colors from '../config/colors';
 import listingsApi from '../api/listings';
 import ActivityIndicator from '../components/ActivityIndicator';
+import useApi from '../hooks/useApi';
 
 const listings = [
   {

@@ -17,7 +17,7 @@ function ListingsScreen({ navigation }) {
   const getListingsApi = useApi(listingsApi.getListings);
 
   useEffect(() => {
-    getListingsApi.request(1, 2, 3);
+    getListingsApi.request();
   }, []);
 
   return (
@@ -25,7 +25,7 @@ function ListingsScreen({ navigation }) {
       {getListingsApi.error && (
         <> 
           <AppText>Couldn't retrieve the listings.</AppText>
-          <AppButton title="Retry" onPress={loadListings} />
+          <AppButton title="Retry" onPress={getListingsApi.request} />
         </>
       )}
       <ActivityIndicator visible={getListingsApi.loading} />

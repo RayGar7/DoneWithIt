@@ -46,10 +46,10 @@ function ListingsScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-   screen: {
-       padding: 20,
-       backgroundColor: colors.light
-   } 
+  screen: {
+    padding: 20,
+    backgroundColor: colors.light
+  } 
 });
 
 export default ListingsScreen;

@@ -14,6 +14,7 @@ import Screen from "../components/Screen";
 import { Formik } from 'formik';
 import listingsApi from "../api/listings";
 import useLocation from "../hooks/useLocation";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -38,15 +39,26 @@ const categories = [
 function ListingEditScreen() {
   const location = useLocation();
   //console.log("location:", location);
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const handleSubmit = async (listing) => {
-    const result = await listingsApi.addListing({ ...listing, location });
+    setUploadVisible(true);
+    // here we need to raise an event for progress
+    const result = await listingsApi.addListing(
+      { ...listing, location },
+      progress => setProgress(progress)
+    );
+    setUploadVisible(false);
     if (!result.ok) 
       alert("Could not save the listing.");
   }
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen 
+        progress={progress} 
+        visible={uploadVisible} />
       <Formik
         initialValues={{
           title: "",

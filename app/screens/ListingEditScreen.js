@@ -49,14 +49,16 @@ function ListingEditScreen() {
       { ...listing, location },
       progress => setProgress(progress)
     );
-    setUploadVisible(false);
-    if (!result.ok) 
-      alert("Could not save the listing.");
+    if (!result.ok) {
+      setUploadVisible(false);
+      return alert("Could not save the listing.");
+    }
   }
 
   return (
     <Screen style={styles.container}>
       <UploadScreen 
+        onDone={() => setUploadVisible(false)}
         progress={progress} 
         visible={uploadVisible} />
       <Formik

@@ -4,6 +4,7 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
 import AppButton from './app/components/AppButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Screen from './app/components/Screen';
@@ -11,6 +12,7 @@ import AuthNavigator from './app/navigation/AuthNavigation';
 import AppNavigator from './app/navigation/AppNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Link = () => {
   const navigation = useNavigation();
@@ -72,11 +74,21 @@ const TabNavigator = () => (
 );
 
 export default function App() {
+  const netInfo = useNetInfo();
+
+  const demo = async () => {
+    try {
+      await AsyncStorage.setItem('person', JSON.stringify({ id: 1 }));
+      const value = await AsyncStorage.getItem('person');
+      const person = JSON.parse(value);
+      console.log(person);
+    } catch {
+      console.log(error);
+    }
+  }
+
+  demo();
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer theme={navigationTheme}>
-        <AppNavigator />
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <AppButton disabled={!netInfo.isInternetReachable}  />
   );
 }

@@ -4,6 +4,7 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
 import AppButton from './app/components/AppButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Screen from './app/components/Screen';
@@ -11,6 +12,7 @@ import AuthNavigator from './app/navigation/AuthNavigation';
 import AppNavigator from './app/navigation/AppNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import OfflineNotice from './app/components/OfflineNotice';
 
 const Link = () => {
   const navigation = useNavigation();
@@ -74,6 +76,7 @@ const TabNavigator = () => (
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <OfflineNotice />
       <NavigationContainer theme={navigationTheme}>
         <AppNavigator />
       </NavigationContainer>

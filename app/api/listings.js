@@ -4,7 +4,23 @@ const endpoint = '/listings';
 
 const getListings = () => client.get(endpoint);
 
-export default {
-    getListings,
+const addListing = (listing, onUploadProgress) => {
+    const data = {
+        title: listing.title,
+        price: listing.price,
+        categoryId: listing.category.value,
+        description: listing.description,
+        images: listing.images, // Send the array of image URIs directly
+        location: listing.location,
+    };
 
+    return client.post(endpoint, data, {
+        onUploadProgress: (progress) => 
+            onUploadProgress(progress.loaded / progress.total),
+    });
+}
+
+export default {
+    addListing,
+    getListings,
 };

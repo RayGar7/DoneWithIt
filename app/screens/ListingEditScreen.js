@@ -12,7 +12,9 @@ import CategoryPickerItem from "../components/CategoryPickerItem";
 
 import Screen from "../components/Screen";
 import { Formik } from 'formik';
+import listingsApi from "../api/listings";
 import useLocation from "../hooks/useLocation";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -36,9 +38,29 @@ const categories = [
 
 function ListingEditScreen() {
   const location = useLocation();
+  //console.log("location:", location);
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const handleSubmit = async (listing) => {
+    setUploadVisible(true);
+    // here we need to raise an event for progress
+    const result = await listingsApi.addListing(
+      { ...listing, location },
+      progress => setProgress(progress)
+    );
+    if (!result.ok) {
+      setUploadVisible(false);
+      return alert("Could not save the listing.");
+    }
+  }
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen 
+        onDone={() => setUploadVisible(false)}
+        progress={progress} 
+        visible={uploadVisible} />
       <Formik
         initialValues={{
           title: "",
@@ -48,7 +70,7 @@ function ListingEditScreen() {
           images: [],
         }}
         // onSubmit pass a function that will be called onSubmit
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleSubmit(values)}
         validationSchema={validationSchema}
       >
         {() => (

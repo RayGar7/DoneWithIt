@@ -8,7 +8,6 @@ import authApi from '../api/auth';
 import { jwtDecode } from 'jwt-decode';
 import AuthContext from '../auth/context';
 
-console.log("jwtDecode:", jwtDecode);
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label('Email'),
@@ -23,17 +22,12 @@ function LoginScreen(props) {
 
 
     const handleSubmit = async ({ email, password}) => {
-        //console.log("submit clicked", email, password);
         const result = await authApi.login(email, password);
-        console.log("result.ok", result.ok);
         if (!result.ok) {
-            console.log("!result.ok", result.ok);
             return setLoginFailed(true);
         }
         setLoginFailed(false);
-        console.log(result.data);
         const user = jwtDecode(result.data);
-        console.log(user);
         authContext.setUser(user);
     }
 
@@ -42,6 +36,7 @@ function LoginScreen(props) {
             <Image 
                 source={require("../assets/logo-red.png")} 
                 style={styles.logo} />
+            <ErrorMessage error={"Invalid email and/or password."} visible={loginFailed} />
             <Form
                 initialValues={{ email: '', password: '' }}
                 onSubmit={handleSubmit}

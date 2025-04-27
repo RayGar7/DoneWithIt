@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 import AppText from "../AppText";
 
 function ErrorMessage({ error, visible }) {
-    console.log("ErrorMessage error and visible", error, visible);
     if (!visible && !error) return null;
 
     return (

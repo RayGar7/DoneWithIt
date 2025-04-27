@@ -77,7 +77,6 @@ const TabNavigator = () => (
 
 export default function App() {
   const [user, setUser] = useState();
-  console.log("App.js user", user);
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <GestureHandlerRootView style={{ flex: 1 }}>

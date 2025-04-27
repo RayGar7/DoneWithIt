@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text } from 'react-native';
 import ListingEditScreen from './app/screens/ListingEditScreen';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,9 +13,11 @@ import AppNavigator from './app/navigation/AppNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import OfflineNotice from './app/components/OfflineNotice';
+import AuthContext from './app/auth/context';
 
 const Link = () => {
   const navigation = useNavigation();
+  const [user, setUser] = useState();
   return (
     <Screen>
       <Text>Tweets</Text>
@@ -74,12 +76,16 @@ const TabNavigator = () => (
 );
 
 export default function App() {
+  const [user, setUser] = useState();
+  console.log("App.js user", user);
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <OfflineNotice />
-      <NavigationContainer theme={navigationTheme}>
-        <AppNavigator />
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <OfflineNotice />
+        <NavigationContainer theme={navigationTheme}>
+          {user ? <AppNavigator /> : <AuthNavigator />}
+        </NavigationContainer>
+      </GestureHandlerRootView>
+    </AuthContext.Provider>
   );
 }

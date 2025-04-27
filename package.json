@@ -21,12 +21,14 @@
     "apisauce": "^3.1.1",
     "axios": "^1.8.4",
     "expo": "~52.0.42",
+    "expo-blur": "~14.0.3",
     "expo-constants": "^17.0.8",
     "expo-image-picker": "~16.0.6",
     "expo-location": "~18.0.10",
     "expo-permissions": "^14.4.0",
     "expo-status-bar": "~2.0.1",
     "formik": "^2.1.4",
+    "jwt-decode": "^4.0.0",
     "lottie-react-native": "^7.1.0",
     "moment": "^2.30.1",
     "react": "18.3.1",
@@ -43,8 +45,7 @@
     "react-native-tab-view": "^4.0.6",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.19.13",
-    "yup": "^1.6.1",
-    "expo-blur": "~14.0.3"
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

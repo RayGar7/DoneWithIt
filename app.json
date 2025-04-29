@@ -2,7 +2,11 @@
   "expo": {
     "name": "DoneWithIt",
     "slug": "DoneWithIt",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
@@ -10,26 +14,30 @@
     "newArchEnabled": true,
     "splash": {
       "image": "./app/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#e63c4b"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
     },
-    "description": "A marketplace for selling the stuff you don't need anymore.", 
+    "description": "A marketplace for selling the stuff you don't need anymore.",
     "android": {
       "package": "com.yourcompany.donewithit",
       "versionCode": 1,
       "permissions": []
     },
-      "jsEngine": "hermes"
-    
+    "jsEngine": "hermes",
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }

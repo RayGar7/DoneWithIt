@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
 import AppButton from './app/components/AppButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AppLoading from 'expo';
+
 
 import Screen from './app/components/Screen';
 import AuthNavigator from './app/navigation/AuthNavigation';
@@ -18,11 +18,14 @@ import OfflineNotice from './app/components/OfflineNotice';
 import AuthContext from './app/auth/context';
 import { jwtDecode } from 'jwt-decode';
 import authStorage from './app/auth/storage';
+import * as SplashScreen from 'expo-splash-screen';
 
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [user, setUser] = useState();
   const [isReady, setIsReady] = useState(false);
+
 
   const restoreToken = async () => {
     const token = await authStorage.getToken();
@@ -35,13 +38,29 @@ export default function App() {
     try {
       setUser(jwtDecode(token));
       console.log("App.js restoreToken user", user);
+      SplashScreen.hideAsync(); 
     } catch (error) {
       console.log("Error decoding token", error);
     }
   }
 
+  useEffect(() => {
+    const prepareApp = async () => {
+      try {
+        await restoreToken(); // Restore the token
+      } catch (error) {
+        console.log("Error during app initialization:", error);
+      } finally {
+        setIsReady(true); // Mark the app as ready
+        SplashScreen.hideAsync(); // Hide the splash screen
+      }
+    };
+
+    prepareApp();
+  }, []);
+
   if (!isReady) {
-    return (<AppLoading startAsync={restoreToken} onFinish={() => setIsReady(true)} />);
+    return null;
   }
 
   return (
@@ -50,9 +69,9 @@ export default function App() {
         <OfflineNotice />
         <NavigationContainer theme={navigationTheme}>
           {user ? 
-            <AppNavigator />
+            (<AppNavigator />)
           : 
-            <AuthNavigator />
+            (<AuthNavigator />)
           }
         </NavigationContainer>
       </GestureHandlerRootView>

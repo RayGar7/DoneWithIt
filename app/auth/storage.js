@@ -21,6 +21,16 @@ const getToken = async () => {
     }
 }
 
+const getUser = async () => {
+    const token = await getToken();
+    try {
+        const token = await getToken();
+        return token ? jwtDecode(token) : null;
+    } catch (error) {
+        console.log("Error getting the auth token", error);
+    }
+}
+
 const removeToken = async () => {
     try {
         await SecureStore.deleteItemAsync(key);

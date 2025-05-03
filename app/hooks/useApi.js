@@ -11,10 +11,10 @@ export default useApi = (apiFunc) => {
     //console.log("ListingsScreen.js response.map:", response.data.map((listing) => listing.images[0].url));
     //console.log("response.data", response.data);
     setLoading(false);
-    if (!response.ok) return setError(true);
-    
-    setError(false);
+
+    setError(!response.ok);
     setData(response.data);
+    return response;
   };
 
   return { data, error, loading, request };

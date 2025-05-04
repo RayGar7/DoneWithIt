@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import Screen from '../components/Screen';
 import {
-  AppFormField as FormField,
+  FormField,
   SubmitButton,
 } from "../components/forms";
 import * as Yup from 'yup';
@@ -29,6 +29,7 @@ function RegisterScreen() {
     const [error, setError] = useState();
 
     const handleSubmit = async (userInfo) => {
+        console.log("RegisterScreen handleSubmit hit");
         const result = await registerApi.request(userInfo);
 
         if (!result.ok) {
@@ -49,50 +50,53 @@ function RegisterScreen() {
     };
 
     return (
-        <Screen style={styles.container}>
-            <ActivityIndicator visible={true} />
-            <Formik
-                initialValues={{ name: "", email: "", password: "" }}
-                onSubmit={handleSubmit}
-                validationSchema={validationSchema} 
-            >
-                {({ handleChange, handleSubmit, values }) => (
-                    <React.Fragment>
-                        <FormField
-                            autoCorrect={false}
-                            icon="account"
-                            name="name"
-                            placeholder="Name"
-                            value={values.name}
-                            onChangeText={handleChange("name")}
-                        />
-                        <FormField
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            icon="email"
-                            keyboardType="email-address"
-                            name="email"
-                            placeholder="Email"
-                            textContentType="emailAddress"
-                            value={values.email}
-                            onChangeText={handleChange("email")}
-                        />
-                        <FormField
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            icon="lock"
-                            name="password"
-                            placeholder="Password"
-                            secureTextEntry
-                            textContentType="password"
-                            value={values.password}
-                            onChangeText={handleChange("password")}
-                        />
-                        <SubmitButton title="Register" onPress={handleSubmit} />
-                    </React.Fragment>
-                )}
-            </Formik>
-        </Screen>
+        <React.Fragment>
+            <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
+            {error && <Text style={styles.errorText}>{error}</Text>}
+            <Screen style={styles.container}>
+                <Formik
+                    initialValues={{ name: "", email: "", password: "" }}
+                    onSubmit={handleSubmit}
+                    validationSchema={validationSchema} 
+                >
+                    {({ handleChange, handleSubmit, values }) => (
+                        <React.Fragment>
+                            <FormField
+                                autoCorrect={false}
+                                icon="account"
+                                name="name"
+                                placeholder="Name"
+                                value={values.name}
+                                onChangeText={handleChange("name")}
+                            />
+                            <FormField
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                icon="email"
+                                keyboardType="email-address"
+                                name="email"
+                                placeholder="Email"
+                                textContentType="emailAddress"
+                                value={values.email}
+                                onChangeText={handleChange("email")}
+                            />
+                            <FormField
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                icon="lock"
+                                name="password"
+                                placeholder="Password"
+                                secureTextEntry
+                                textContentType="password"
+                                value={values.password}
+                                onChangeText={handleChange("password")}
+                            />
+                            <SubmitButton title="Register" onPress={handleSubmit} />
+                        </React.Fragment>
+                    )}
+                </Formik>
+            </Screen>
+        </React.Fragment>
     );
 }
 
@@ -106,7 +110,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: 50,
         marginBottom: 20,
-    }
+    },
+    errorText: {
+        color: "red",
+        marginBottom: 10,
+    },
 });
 
 export default RegisterScreen;

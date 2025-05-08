@@ -18,7 +18,8 @@
       "backgroundColor": "#e63c4b"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/21ccde52-7768-4f78-a54e-9287b3787dd4"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -31,14 +32,21 @@
     },
     "description": "A marketplace for selling the stuff you don't need anymore.",
     "android": {
-      "package": "com.yourcompany.donewithit",
-      "versionCode": 1,
-      "permissions": []
+      "package": "com.raygar.donewithit",
+      "versionCode": 1
     },
     "jsEngine": "hermes",
     "plugins": [
       "expo-secure-store",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "21ccde52-7768-4f78-a54e-9287b3787dd4"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }

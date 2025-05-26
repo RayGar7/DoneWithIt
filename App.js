@@ -29,7 +29,6 @@ export default function App() {
 
   const restoreToken = async () => {
     const token = await authStorage.getToken();
-    console.log("restoreToken token", token);
     if (!token) {
       console.log("No token found");
       setUser(null);
@@ -37,7 +36,6 @@ export default function App() {
     }
     try {
       setUser(jwtDecode(token));
-      console.log("App.js restoreToken user", user);
       SplashScreen.hideAsync(); 
     } catch (error) {
       console.log("Error decoding token", error);

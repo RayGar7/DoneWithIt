@@ -29,7 +29,6 @@ function RegisterScreen() {
     const [error, setError] = useState();
 
     const handleSubmit = async (userInfo) => {
-        console.log("RegisterScreen handleSubmit hit");
         const result = await registerApi.request(userInfo);
 
         if (!result.ok) {

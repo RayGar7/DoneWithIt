@@ -12,7 +12,7 @@ import CategoryPickerItem from "../components/CategoryPickerItem";
 
 import Screen from "../components/Screen";
 import { Formik } from 'formik';
-import listingsApi from "../api/listings";
+import fireworksApi from "../api/fireworks";
 import useLocation from "../hooks/useLocation";
 import UploadScreen from "./UploadScreen";
 
@@ -42,66 +42,22 @@ function ListingEditScreen() {
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  const handleSubmit = async (listing) => {
-    setUploadVisible(true);
-    // here we need to raise an event for progress
-    const result = await listingsApi.addListing(
-      { ...listing, location },
-      progress => setProgress(progress)
-    );
-    if (!result.ok) {
-      setUploadVisible(false);
-      return alert("Could not save the listing.");
-    }
-  }
+  // const handleSubmit = async (listing) => {
+  //   setUploadVisible(true);
+  //   // here we need to raise an event for progress
+  //   const result = await listingsApi.addListing(
+  //     { ...listing, location },
+  //     progress => setProgress(progress)
+  //   );
+  //   if (!result.ok) {
+  //     setUploadVisible(false);
+  //     return alert("Could not save the listing.");
+  //   }
+  // }
 
   return (
     <Screen style={styles.container}>
-      <UploadScreen 
-        onDone={() => setUploadVisible(false)}
-        progress={progress} 
-        visible={uploadVisible} />
-      <Formik
-        initialValues={{
-          title: "",
-          price: "",
-          description: "",
-          category: null,
-          images: [],
-        }}
-        // onSubmit pass a function that will be called onSubmit
-        onSubmit={(values) => handleSubmit(values)}
-        validationSchema={validationSchema}
-      >
-        {() => (
-          <>
-            <FormImagePicker name="images" />
-            <FormField maxLength={255} name="title" placeholder="Title" />
-            <FormField
-              keyboardType="numeric"
-              maxLength={8}
-              name="price"
-              placeholder="Price"
-            />
-            <Picker
-              items={categories}
-              name="category"
-              numberOfColumns={3}
-              PickerItemComponent={CategoryPickerItem}
-              placeholder="Category"
-              width="50%"
-            />
-            <FormField
-              maxLength={255}
-              multiline
-              name="description"
-              numberOfLines={3}
-              placeholder="Description"
-            />
-            <SubmitButton title="Post" />
-          </>
-        )}
-      </Formik>
+
     </Screen>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import ListingsScreen from "../screens/ListingsScreen";
+import FireworksScreen from "../screens/FireworksScreen";
 import ListingDetailsScreen from "../screens/ListingDetailsScreen";
 
 const Stack = createStackNavigator();
@@ -8,8 +8,8 @@ const Stack = createStackNavigator();
 const FeedNavigator = () => (
     <Stack.Navigator mode="modal" screenOptions={{ headerShown: false }}>
         <Stack.Screen 
-            name="Listings" 
-            component={ListingsScreen} 
+            name="Fireworks" 
+            component={FireworksScreen} 
         />
         <Stack.Screen 
             name="ListingDetails" 

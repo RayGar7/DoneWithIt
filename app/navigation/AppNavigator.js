@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AccountScreen from "../screens/AccountScreen";
-import ListingsScreen from "../screens/ListingsScreen";
+import FireworksScreen from "../screens/FireworksScreen";
 import ListingEditScreen from "../screens/ListingEditScreen";
 import FeedNavigator from './FeedNavigator';
 import AccountNavigator from './AccountNavigator';
@@ -12,7 +12,7 @@ import { StyleSheet } from 'react-native';
 
 import colors from '../config/colors';
 
-const ListingsRoute = () => <ListingsScreen />;
+const ListingsRoute = () => <FireworksScreen />;
 const ListingEditRoute = () => <ListingEditScreen />;
 const AccountRoute = () => <AccountScreen />;
 

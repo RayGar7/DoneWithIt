@@ -2,13 +2,15 @@ import Constants from 'expo-constants';
 
 const settings = {
     dev: {
-        apiUrl: 'https://www.igniteopsfireworks.com/api',
+        apiUrl: 'https://www.igniteopsfireworks.com',
+        //apiUrl: 'http://192.168.1.143:8000'
     },
     staging: {
         apiUrl: 'http://192.168.1.143:9000/api',
     },
     prod: {
-        apiUrl: 'https://www.igniteopsfireworks.com/api',
+        apiUrl: 'https://www.igniteopsfireworks.com'
+        //apiUrl: 'http://192.168.1.143:8000'
     },
 }
 

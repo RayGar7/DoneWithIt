@@ -30,7 +30,6 @@ export default function App() {
   const restoreToken = async () => {
     const token = await authStorage.getToken();
     if (!token) {
-      console.log("No token found");
       setUser(null);
       return; 
     }

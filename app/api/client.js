@@ -8,10 +8,8 @@ const apiClient = create({
 });
 
 apiClient.addAsyncRequestTransform(async (request) => {
-    //const authToken = await authStorage.getToken();
+    const authToken = await authStorage.getToken();
 
-    // fake a token
-    const authToken = ""; 
     if (!authToken) {
         return;
     } else {

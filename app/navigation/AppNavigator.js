@@ -12,60 +12,60 @@ import { StyleSheet } from 'react-native';
 
 import colors from '../config/colors';
 
-const ListingsRoute = () => <FireworksScreen />;
+const FireworksRoute = () => <FireworksScreen />;
 const ListingEditRoute = () => <ListingEditScreen />;
 const AccountRoute = () => <AccountScreen />;
 
 const AppNavigator = () => {
-    const [index, setIndex] = useState(0);
-    const [routes] = useState([
-        { key: 'listings', title: 'Listings' },
-        { key: 'listingEdit', title: 'Edit Listing' },
-        { key: 'account', title: 'Account' },
-    ]);
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    { key: 'fireworks', title: 'Fireworks' },
+    { key: 'listingEdit', title: 'Edit Listing' },
+    { key: 'account', title: 'Account' },
+  ]);
 
-    const renderScene = SceneMap({
-        listings: ListingsRoute,
-        listingEdit: ListingEditRoute,
-        account: AccountRoute,
-    });
+  const renderScene = SceneMap({
+    fireworks: FireworksRoute,
+    listingEdit: ListingEditRoute,
+    account: AccountRoute,
+  });
 
-    return (
-        <TabView
-            navigationState={{ index, routes }}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            initialLayout={{ width: 360 }}
-            renderTabBar={(props) => (
-              <TabBar
-                {...props}
-                style={styles.tabBar}
-                indicatorStyle={styles.indicator}
-                labelStyle={styles.label}
-              />
-            )}
-            style={styles.container}
-        />
-    )
+  return (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={{ width: 360 }}
+      renderTabBar={(props) => (
+      <TabBar
+        {...props}
+        style={styles.tabBar}
+        indicatorStyle={styles.indicator}
+        labelStyle={styles.label}
+      />
+      )}
+      style={styles.container}
+    />
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    tabBar: {
-      backgroundColor: colors.primary,
-      position: 'absolute', // Ensures the tab bar stays at the bottom
-      bottom: 0,
-      left: 0,
-      right: 0,
-    },
-    indicator: {
-      backgroundColor: 'blue', // Customize the indicator color
-    },
-    label: {
-      color: 'black', // Customize the label color
-    },
+  container: {
+    flex: 1,
+  },
+  tabBar: {
+    backgroundColor: colors.primary,
+    position: 'absolute', // Ensures the tab bar stays at the bottom
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  indicator: {
+    backgroundColor: 'blue', // Customize the indicator color
+  },
+  label: {
+    color: 'black', // Customize the label color
+  },
 });
 
 export default AppNavigator;

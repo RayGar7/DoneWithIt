@@ -19,9 +19,6 @@ function FireworksScreen({ navigation }) {
   useEffect(() => {
     const fetchFireworks = async () => {
       await getFireworksApi.request();
-      //console.log("Fireworks API Response:", response); // Log the full response
-      console.log("Fireworks Data:", getFireworksApi.data[0]); // Log the fetched data
-      console.log("API Error:", getFireworksApi.error); // Log any errors
     };
   
     fetchFireworks();
@@ -45,8 +42,7 @@ function FireworksScreen({ navigation }) {
               title={item.name}
               subTitle={"$" + item.price}
               imageUrl={item.image}
-              onPress={() => navigation.navigate("/")}
-              //onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+              onPress={() => navigation.navigate(routes.FIREWORK_DETAILS, item)}
               thumbnailUrl={item.image}
             />
           )}

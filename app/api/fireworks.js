@@ -1,6 +1,6 @@
 import client from './client';
 
-const endpoint = '/fireworks';
+const endpoint = '/api/fireworks';
 
 const getFireworks = () => {
     return client.get(endpoint);

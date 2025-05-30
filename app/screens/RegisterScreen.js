@@ -32,22 +32,18 @@ function RegisterScreen() {
     const handleSubmit = async (userInfo) => {
         setError(null);
         const result = await registerApi.request(userInfo);
-        console.log("result", result);
         if (!result.ok) {
             if (result.data) {
                 setError(result.data.error);
-                console.log("result", result);
-                console.log("result.data.error", result.data.error);
             }
             else {
-                setError("An unexpected error ocurred.");
                 console.log(result);
             }
             return;
         }
 
         const loginResult = await loginApi.request(userInfo.username, userInfo.password);
-        console.log("loginResult", loginResult);
+        
         if (!loginResult.ok || !loginResult.data.access) {
             setError("Login failed after registration.");
             return;

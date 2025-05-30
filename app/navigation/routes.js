@@ -1,6 +1,6 @@
 export default Object.freeze({
-    LISTING_DETAILS: 'ListingDetails',
-    LISTING_EDIT: "ListingEdit",
+    FIREWORK_DETAILS: 'FireworkDetails',
+    FIREWORK_EDIT: "FireworkEdit",
     LOGIN: "Login",
     MESSAGES: "Messages",
     REGISTER: "Register",
